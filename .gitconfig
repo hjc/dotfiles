@@ -1,0 +1,7 @@
+[user]
+	email = hayden.chudy@croscon.com
+	name = Hayden Chudy
+[core]
+	editor = vim
+[color]
+	ui = true

@@ -1,0 +1,111 @@
+###############
+# Programming #
+###############
+
+	bind-gits	- Bind ~/gits to /mnt/unencrypted via bindfs for vagrant fun.
+	restart-apache  - Restart Apache (via init.d for some reason)
+	restart-nginx   - Restart nginx (via service)
+
+############
+# Listings #
+############
+
+	ls      - add color, print human readable, no sort
+	lx      - sort by extension
+	lk      - sort by size
+	la      - show hidden files
+	lr      - recursive ls
+	lt      - sort by date
+	lm      - pipe through 'more'
+	tree    - nice alternative to 'ls', tree display
+	ll      - long listing
+	l       - quick listing
+	lsize   - list by size
+	lsd     - list only directories
+
+##############
+#   System   #
+#  Utilities #
+##############
+
+	ff - find file
+
+###############
+# Git Aliases #
+###############
+
+	gcob     - git checkout -b
+	gco      - git checkout
+	gaa      - git add ./*
+	gcam     - git commit -am
+	gstat    - git status
+	gdiff    - git diff
+	gb       - git branch
+	ginit    - git init
+	glog	 - git log (with --decorate for tags)
+	gmerge	 - git merge
+	gp	 - git push
+	gpo	 - git push origin
+	gpom	 - git push origin master
+
+############
+# Movement #
+############
+
+	back    - go back
+	..      - go up
+	...     - go up twice
+	....    - go up thrice
+	.....   - four times
+	......  - five times
+	
+#############
+# Directory #
+# Shortcuts #
+#############
+
+	home        - go to home directory
+	documents   - go to documents dir
+	downloads   - go to downloads dir
+	localhost   - go to localhost
+	jtrk        - go to JagTrack Eclipse directory
+	wrks        - go to Eclipse workspace
+	drp	    - go to Drupal root folder (/var/www/)
+
+
+############
+# Programs #
+############
+
+	eclipse	- start Eclipse IDE
+	finch	- start finch terminal messenger
+	guake	- start Guake (guake -p for preferences)
+	spotify	- launch spotify gui client
+	xclip	- xclip to primary linux clipboard
+
+##############
+# Package    #
+# Management #
+##############
+
+	apt-update	- apt update w/o sudo
+	install		- install w/o sudo
+	remove		- remove w/o sudo
+	search		- search for a package
+
+#########
+# Misc. #
+#########
+
+	reload          - reload the bash shell with new source
+	restart-apache  - restart apache
+	start-gae_ud	- start Google App Engine with Udacity App
+	update-gae_ud	- upload or update Google App: hjcudacity (Udacity App)
+
+##########
+#  Help  #
+##########
+
+	aliases		- display aliases help file (this)
+	bash-help	- display general bash help file
+
