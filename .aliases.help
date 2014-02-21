@@ -5,6 +5,10 @@
 	bind-gits	- Bind ~/gits to /mnt/unencrypted via bindfs for vagrant fun.
 	restart-apache  - Restart Apache (via init.d for some reason)
 	restart-nginx   - Restart nginx (via service)
+	vag-u		- Vagrant up
+	vag-h		- Vagrant halt
+	vag-s		- Vagrant ssh
+	vag-p		- Vagrant provision
 
 ############
 # Listings #

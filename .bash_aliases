@@ -2,6 +2,11 @@
 
 ## Programming Aliases (aliases which help development)
 alias bind-gits='sudo bindfs ~/gits/ /mnt/unencrypted/'
+# Some for Vagrant
+alias vag-u='vagrant up'
+alias vag-h='vagrant halt'
+alias vag-s='vagrant ssh'
+alias vag-p='vagrant provision'
 
 ## Display aliases list
 #alias aliases='more ~/.bash_aliases'
