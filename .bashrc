@@ -97,10 +97,19 @@ extract() {
 }
 
 vagrant-up () {
-	CWD=$(pwd);
-	cd /mnt/unencrypted/$1;
-	vagrant up;
-	cd $CWD;
+        CWD=$(pwd);
+        TAR_DIR=$1;
+        if [ -z $TAR_DIR ]; then
+                arr=$(echo $CWD | tr "/" "\n");
+                for x in $arr
+                do
+                        val=$x;
+                done
+                TAR_DIR=$val;
+        fi
+        cd /mnt/unencrypted/$TAR_DIR;
+        vagrant up;
+        cd $CWD;
 }
 
 vagrant-halt () {
