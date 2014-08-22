@@ -2,6 +2,15 @@
 
 ## Programming Aliases (aliases which help development)
 alias bind-gits='sudo bindfs ~/gits/ /mnt/unencrypted/'
+alias bind-programming='sudo bindfs ~/Programming/ /mnt/programming/unencrypted/'
+alias start-android-server='adb forward tcp:9222 localabstract:chrome_devtools_remote' # start the Android remote debugging service for Chrome
+
+# Launch the best PHP Repl ever
+alias psysh='~/.composer/vendor/psy/psysh/bin/psysh'
+
+# Use the imgur-ss CLI uploading tool
+alias imgur-ss='~/.shell_repos/imgur-screenshot/imgur-screenshot.sh'
+
 # Some for Vagrant
 alias vag-u='vagrant up'
 alias vag-h='vagrant halt'
@@ -9,13 +18,13 @@ alias vag-s='vagrant ssh'
 alias vag-p='vagrant provision'
 
 ## Display aliases list
-#alias aliases='more ~/.bash_aliases'
+#alias aliases='less ~/.bash_aliases'
 
 # some more ls aliases
 alias ls='ls -hF --color'    # add colors for filetype recognition
 alias lx='ls -lXB'        # sort by extension
 alias lk='ls -lSr'        # sort by size
-alias la='ls -Al'        # show hidden files
+alias la='ls -Alh'        # show hidden files
 alias lr='ls -lR'        # recursive ls
 alias lt='ls -ltr'        # sort by date
 alias lm='ls -al |more'        # pipe through 'more'
@@ -41,13 +50,9 @@ alias home='cd ~/'		# go to home directory
 alias documents='cd ~/Documents'	# go to documents dir
 alias downloads='cd ~/Downloads'	# go to downloads dir
 alias localhost='cd /var/www'		# go to localhost
-alias jtrk='cd ~/workspace/JagTrack' # go to JagTrack Eclipse directory
-alias wrks='cd ~/workspace/'		# go to Eclipse home directory
-alias drp='cd /var/www'			# go to Drupal root director (/var/www)
 
 ## Shorten and organize
 alias reload='source ~/.bashrc'		# reload the bash shell with new
-							# source
 
 ## Sudo fixes
 alias install='sudo apt-get install' # remove sudo
@@ -65,10 +70,13 @@ alias search="apt-cache search"
 alias ff='sudo find / -name'	# Find a file easily
 
 # Help
-alias aliases='cat ~/.aliases.help | more'
-alias bash-help='cat ~/.bash.help | more'
+alias aliases='cat ~/.aliases.help | less'
+alias bash-help='cat ~/.bash.help | less'
 
 # Fix terminal commands
 alias xclip='xclip -selection C'
 alias bc='bc -l'
+
+# Misc. editor commands
+alias v='vim'
 

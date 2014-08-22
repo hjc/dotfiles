@@ -172,7 +172,6 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -183,8 +182,6 @@ fi
 
 # some more ls aliases
 alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -208,6 +205,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 
+if [ -f ~/.bash_includes ]; then
+    . ~/.bash_includes
+fi
 
 
 #old with date
@@ -216,8 +216,6 @@ fi
 export PS1='\[\e[1;36m\]\u\[\e[00m\][\[\e[01;34m\]\h\[\e[00m]\] \[\e[0;32m\]{\[\e[1;32m\]\w\[\e[0;32m\]}\[\e[0;33m\]$(__git_ps1) \[\e[0;31m\]~>\[\e[00m\] '
 
 #export PS1='\[\033[01;32m\]\u\[\033[01;34m\]::\[\033[01;31m\]\h \[\033[00;34m\]{ \[\033[01;34m\]\w \[\033[00;34m\]}\[\033[01;32m\]-> \[\033[00m\]'
-
-#cupcakepounder69
 
 # Check this shit out, some good stuff in here
 #
