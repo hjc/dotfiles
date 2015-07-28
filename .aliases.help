@@ -2,13 +2,28 @@
 # Programming #
 ###############
 
-	bind-gits	- Bind ~/gits to /mnt/unencrypted via bindfs for vagrant fun.
-	restart-apache  - Restart Apache (via init.d for some reason)
-	restart-nginx   - Restart nginx (via service)
-	vag-u		- Vagrant up
-	vag-h		- Vagrant halt
-	vag-s		- Vagrant ssh
-	vag-p		- Vagrant provision
+	bind-gits		- Bind ~/gits to /mnt/unencrypted via bindfs for vagrant fun.
+	start-android-server	- Start the adb debugging server under port 9222
+	restart-apache  	- Restart Apache (via init.d for some reason)
+	restart-nginx   	- Restart nginx (via service)
+	vagrant-up		- Do a Vagrant Up from inside a BindFS synced directory
+
+
+################
+# Google Cloud #
+################
+
+	gcloud-clear-project		- Clear the `project` config value for the gcloud util so accidental deploys do not happen.
+
+
+#######
+# GPG #
+#######
+
+	gpg-encrypt		- Encrypt a file with GPG, will prompt for recipients
+	gpg-decrypt		- Attempt to decrypt a file with GPG
+	gpg-keys		- List all GPG keys in the keyring, in short form
+	gpg-fingerprints	- Show all GPG keys in the keyring, with their fingerprints
 
 ############
 # Listings #
@@ -62,7 +77,7 @@
 	....    - go up thrice
 	.....   - four times
 	......  - five times
-	
+
 #############
 # Directory #
 # Shortcuts #

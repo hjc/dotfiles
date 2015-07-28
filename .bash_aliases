@@ -4,21 +4,27 @@
 alias bind-gits='sudo bindfs ~/gits/ /mnt/unencrypted/'
 alias bind-programming='sudo bindfs ~/Programming/ /mnt/programming/unencrypted/'
 alias start-android-server='adb forward tcp:9222 localabstract:chrome_devtools_remote' # start the Android remote debugging service for Chrome
+alias psysh='~/.composer/vendor/psy/psysh/bin/psysh'  # PsySH is an amazing PHP REPL.
 
-# Launch the best PHP Repl ever
-alias psysh='~/.composer/vendor/psy/psysh/bin/psysh'
 
-# Use the imgur-ss CLI uploading tool
+#############################
+#   BEGIN SENSITIVE ALIASES #
+#############################
+
+## Google App Engine Aliases
+alias gcloud-clear-project='gcloud config set project some-junk-here-123123'
+
+##############################
+# END SENSITIVE ALIASES      #
+##############################
+
+## GPG Aliases
+alias gpg-encrypt='gpg --encrypt --armor'
+alias gpg-decrypt='gpg --decrypt'
+alias gpg-keys='gpg --list-key'
+alias gpg-fingerprints='gpg -K --keyid-format long --with-colons --with-fingerprint'
+
 alias imgur-ss='~/.shell_repos/imgur-screenshot/imgur-screenshot.sh'
-
-# Some for Vagrant
-alias vag-u='vagrant up'
-alias vag-h='vagrant halt'
-alias vag-s='vagrant ssh'
-alias vag-p='vagrant provision'
-
-## Display aliases list
-#alias aliases='less ~/.bash_aliases'
 
 # some more ls aliases
 alias ls='ls -hF --color'    # add colors for filetype recognition
@@ -52,7 +58,7 @@ alias downloads='cd ~/Downloads'	# go to downloads dir
 alias localhost='cd /var/www'		# go to localhost
 
 ## Shorten and organize
-alias reload='source ~/.bashrc'		# reload the bash shell with new
+alias reload='source ~/.bashrc'		# reload the bash shell with new source
 
 ## Sudo fixes
 alias install='sudo apt-get install' # remove sudo
@@ -77,6 +83,5 @@ alias bash-help='cat ~/.bash.help | less'
 alias xclip='xclip -selection C'
 alias bc='bc -l'
 
-# Misc. editor commands
+# Misc. Editor goodness
 alias v='vim'
-
