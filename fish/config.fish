@@ -33,3 +33,4 @@ function .fixcommand --description 'Try to fix a mistyped command'
 end
 
 bash /home/hayden/google-cloud-sdk/path.bash.inc
+set -gx PATH /usr/sbin /sbin $PATH
