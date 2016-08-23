@@ -57,20 +57,20 @@ esac
 
 export EDITOR="vim"
 
-if [ -f ~/.bash_gh ]; then
-	. ~/.bash_gh
+if [ -f $(pwd)/.bash_gh ]; then
+	. $(pwd)/.bash_gh
 fi
 
-if [ -f ~/.bash_aliases ]; then
-	. ~/.bash_aliases
+if [ -f $(pwd)/.bash_aliases ]; then
+	. $(pwd)/.bash_aliases
 fi
 
-if [ -f ~/.bashgit ]; then
-	. ~/.bashgit
+if [ -f $(pwd)/.bashgit ]; then
+	. $(pwd)/.bashgit
 fi
 
-if [ -f ~/.git-completion.bash ]; then
-	source ~/.git-completion.bash
+if [ -f $(pwd)/.git-completion.bash ]; then
+	source $(pwd)/.git-completion.bash
 fi
 
 # Easy extract
@@ -96,41 +96,46 @@ extract() {
 	fi
 }
 
+# vagrant helpers for encrypted home directores and bindfs
 vagrant-up () {
-        CWD=$(pwd);
-        TAR_DIR=$1;
-        if [ -z $TAR_DIR ]; then
-                arr=$(echo $CWD | tr "/" "\n");
-                for x in $arr
-                do
-                        val=$x;
-                done
-                TAR_DIR=$val;
+	CWD=$(pwd);
+	TAR_DIR=$1;
+	if [ -z ${TAR_DIR} ]; then
+		arr=$(echo $CWD | tr "/" "\n");
+		for x in ${arr}
+		do
+			val=${x};
+		done
+		TAR_DIR=${val};
+	fi 
+	cd /mnt/unencrypted/$TAR_DIR;
+        if [[ $? != 0 ]]; then
+            # we haven't done bindfs yet, set us up
+            bind-gits
         fi
-        cd /mnt/unencrypted/$TAR_DIR;
-        vagrant up;
-        cd $CWD;
+	vagrant up;
+	cd ${CWD};
 }
 
 vagrant-halt () {
-        CWD=$(pwd);
-        cd /mnt/unencrypted/$1;
-        vagrant halt;
-        cd $CWD;
+	CWD=$(pwd);
+	cd /mnt/unencrypted/$1;
+	vagrant halt;
+	cd ${CWD};
 }
 
 vagrant-ssh () {
         CWD=$(pwd);
         cd /mnt/unencrypted/$1;
         vagrant ssh;
-        cd $CWD;
+        cd ${CWD};
 }
 
 vagrant-provision () {
-        CWD=$(pwd);
+	    CWD=$(pwd);
         cd /mnt/unencrypted/$1;
         vagrant provision;
-        cd $CWD;
+        cd ${CWD};
 }
 
 vpn () {
@@ -142,23 +147,23 @@ vpn () {
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
+#if [ -n "$force_color_prompt" ]; then
+#    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+#	# We have color support; assume it's compliant with Ecma-48
+#	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+#	# a case would tend to support setf rather than setaf.)
+#	color_prompt=yes
+#    else
+#	color_prompt=
+#    fi
+#fi
+#
+#if [ "$color_prompt" = yes ]; then
+#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#else
+#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+#fi
+#unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -172,8 +177,8 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -193,8 +198,8 @@ alias 'ssh-aliases'='cat ~/.ssh/config | grep Host'
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f $(pwd)/.bash_aliases ]; then
+    . $(pwd)/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -204,16 +209,92 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-
-if [ -f ~/.bash_includes ]; then
-    . ~/.bash_includes
+if [ -f $(pwd)/.bash_includes ]; then
+    . $(pwd)/.bash_includes
 fi
 
 
-#old with date
-#export PS1='\[\e[1;35m\]\D{%I:%M:%S %P (%a %b %d, %y)}\[\e[00m\]\n\n\[\e[1;36m\]\u\[\e[00m\][\[\e[01;34m\]\h\[\e[00m]\] \[\e[0;32m\]{\[\e[1;32m\]\w\[\e[0;32m\]}\[\e[0;33m\]$(__git_ps1) \[\e[0;31m\]~>\[\e[00m\] '
+export PS1='\[\e[1;36m\]\u\[\e[00m\][\[\e[01;34m\]\h\[\e[00m\]] \[\e[0;32m\]{\[\e[1;32m\]\w\[\e[0;32m\]}\[\e[0;33m\]$(__git_ps1) \[\e[0;31m\]~>\[\e[00m\] '
 
-export PS1='\[\e[1;36m\]\u\[\e[00m\][\[\e[01;34m\]\h\[\e[00m]\] \[\e[0;32m\]{\[\e[1;32m\]\w\[\e[0;32m\]}\[\e[0;33m\]$(__git_ps1) \[\e[0;31m\]~>\[\e[00m\] '
+# use xdotool to slightly move the mouse in order to disable a screensaver. Was used for
+# a Raspberry Pi project when all normal screensaver disabling techniques failed.
+no-screensaver () {
+	COUNTER=0;
+	while [ $COUNTER -ne "-1" ]; do
+		xdotool mousemove $COUNTER 0
+		COUNTER=$(echo "$COUNTER + 5" | bc)
+		if [ $COUNTER -eq "255" ]; then
+			COUNTER=0
+		fi
+		sleep 7m;
+	done
+}
+
+# sleep a given number of seconds and then alert a message
+delayed-alert () {
+	(sleep $1 && notify-send -u critical -t 0 "$2") &
+}
+
+# echo out the unicode for the disapproval look
+disapproval-look () {
+	echo "ಠ_ಠ"
+}
+
+gifs () {
+  if [ $1 == "barney-confetti" ]; then
+    echo "http://whateverblog.dallasnews.com/files/2013/06/barney-confetti.gif";
+  elif [ $1 == "rock-clapping" ]; then
+    echo "http://i.imgur.com/dhMeAzK.gif"
+  elif [ $1 == "excited-tswift" ]; then
+    echo "http://i.giphy.com/u23zXEvNsIbfO.gif"
+  elif [ $1 == "disgusted-tswift" ]; then
+    echo "http://i.giphy.com/c5z3EDtBsgLwA.gif"
+  elif [ $1 == "mind-blown" ]; then
+    echo "http://www.reactiongifs.com/r/2011/09/mind_blown.gif"
+  elif [ $1 == "thumb" ]; then
+    echo "https://thechive.files.wordpress.com/2014/03/chuck-norris-thumbs-up-dodgeball-gif.gif"
+  elif [ $1 == "thumbs-up" ]; then
+    echo "https://thechive.files.wordpress.com/2014/03/chuck-norris-thumbs-up-dodgeball-gif.gif"
+  elif [ $1 == "cram-it" ]; then
+    echo "http://f.cl.ly/items/0w1j3w2k2b383T3c1M3k/cramit.png"
+  elif [ $1 == "shrug" ]; then
+    printf "¯\_(ツ)_/¯"
+  elif [ $1 == "confused-tswift" ]; then
+    echo "http://i.giphy.com/uLTvMTebsVdSw.gif"
+  elif [ $1 == "disappointed-tswift" ]; then
+    printf "http://i.giphy.com/w3j54RqQkzY9W.gif"
+  elif [ $1 == "acceptance-shrug-tswift" ]; then
+    echo "http://i.giphy.com/1DfdCZ4X6eDCw.gif"
+  elif [ $1 == "shrug-tswift" ]; then
+    echo "http://i.giphy.com/qsbpGsQJef8l2.gif"
+  elif [ $1 == "heart-tswift" ]; then
+    echo "http://i.giphy.com/fpakjlMN495vi.gif"
+  elif [ $1 == "excited-charlie" ]; then
+    echo "http://i.giphy.com/s1SqOgMcBm5Ak.gif"
+  elif [ $1 == "contained-excited-charlie" ]; then
+    echo "http://i.giphy.com/2JsswGOTfr3lC.gif"
+  elif [ $1 == "ill-allow-it" ]; then
+    printf "http://i.giphy.com/SmoCFhZCi1kzu.gif"
+  elif [ $1 == "checkmark" ]; then
+    printf "✔"
+  elif [ $1 == "table-flip" ]; then
+    printf "(╯°□°)╯︵ ┻━┻"
+  elif [ $1 == "excited-scream" ]; then
+    printf "http://i.giphy.com/2alKkyRFPKRSU.gif"
+  elif [ $1 == "excited-andy" ]; then
+    printf "http://i.giphy.com/90F8aUepslB84.gif"
+  elif [ $1 == "single-tear-of-joy" ]; then
+    printf "http://boards.fightingamphibians.org/ani/src/131051195738.jpg"
+  elif [ $1 == "tears-of-joy" ]; then
+    printf "http://3.bp.blogspot.com/-w_PnKVAXhHI/UDyxgexYO0I/AAAAAAAAALE/bIh_XzNZrx8/s320/tears+of+joy.gif"
+  elif [ $1 == "nicolas-cage-universe" ]; then
+    printf "http://i.imgur.com/d3XtuP3.gif"
+  elif [ $1 == "its-happening" ]; then
+    printf "http://i.giphy.com/rl0FOxdz7CcxO.gif"
+  elif [ $1 == "hot-damn" ]; then
+    printf "http://i.giphy.com/80KYXCRVLo1ji.gif"
+  fi
+}
 
 #export PS1='\[\033[01;32m\]\u\[\033[01;34m\]::\[\033[01;31m\]\h \[\033[00;34m\]{ \[\033[01;34m\]\w \[\033[00;34m\]}\[\033[01;32m\]-> \[\033[00m\]'
 
@@ -271,3 +352,13 @@ export PS1='\[\e[1;36m\]\u\[\e[00m\][\[\e[01;34m\]\h\[\e[00m]\] \[\e[0;32m\]{\[\
 # alias grep='grep --color=auto -in'
 # alias v='vim'
 # alias ..='cd ..'
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/home/hayden/google-cloud-sdk/path.bash.inc'
+
+# The next line enables bash completion for gcloud.
+source '/home/hayden/google-cloud-sdk/completion.bash.inc'
+
+export PATH="$PATH:~/.gstorage/gsutil"
+export PATH="$PATH:/opt/jq"
+export PATH="$PATH:~/.keybase/bin"
