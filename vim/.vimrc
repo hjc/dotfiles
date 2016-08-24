@@ -114,9 +114,54 @@ inoremap jj <Esc>
 nnoremap <leader>, :update<CR>
 " Toggle line numbers with `,tn`
 nnoremap <leader>tn :set invnumber<CR>
+" Activate and deactivate nerdtree
 nnoremap <leader>nt :NERDTreeToggle<CR>
+
+" Buffer funs (<leader>b then things)
+
+" Open buffers (<leader>bn then v or h)
+nnoremap <leader>bnv :vsplit<CR>:<backspace>
+nnoremap <leader>bnh :split<CR>:<backspace>
+
+" Resize vertical buffers (<leader>brv)
+function ResizeVertical(amount)
+  execute "vertical resize +" . a:amount
+endfunction
+nnoremap <leader>brv :<C-U>call ResizeVertical(v:count1)<CR>:<backspace>
+
+" Resize horizontal buffers (<leader>brh)
+function ResizeHorizontal(amount)
+  execute "resize +" . a:amount
+endfunction
+nnoremap <leader>brh :<C-U>call ResizeHorizontal(v:count1)<CR>:<backspace>
+
 " Set pseudo-caps lock in insert mode with `CTRL-6`
 for c in range(char2nr('A'), char2nr('Z'))
   execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
   execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
 endfor
+
+" Plugin Customizations
+let g:NERDTreeIgnore = ['\.pyc$', '__pycache__']
+
+" Ripped from Eli; see if this makes __pycache__ go away, then adapt from there
+" let g:NERDChristmasTree = 1
+" let g:NERDTreeCasadeOpenSingleChildDir = 1
+" let g:NERDTreeChDirMode = 1
+" let g:NERDTreeDirArrows = 0
+" let g:NERDTreeDirArrows = 0
+" let g:NERDTreeHijackNetrw = 1
+" let g:NERDTreeIgnore = ['\.swp$', '\~$', '\.pyc', '__pycache__', '.DS_Store']
+" let g:NERDTreeMinimalUI = 1
+" let g:NERDTreeShowBookmarks = 1
+" let g:NERDTreeShowFiles = 1
+" let g:NERDTreeShowHidden = 1
+" let g:NERDTreeShowLineNumbers = 0
+" let g:NERDTreeWinSize = 22
+
+" function! NERDTreeSettings()
+"   nnoremap <silent> <Leader>nt :UndotreeHide<CR>:NERDTreeToggle<CR>
+"   autocmd FileType nerdtree setlocal colorcolumn=""
+" endfunction
+
+" autocmd VimEnter * if exists(":NERDTree") | call NERDTreeSettings() | endif
