@@ -107,6 +107,8 @@ let g:solarized_termtrans=1
 
 
 " My own customizations
+" Clear highlighting; `:<backspace>` gets rid of lingering commands, it's used
+" frequently
 nnoremap <Space> :noh<CR>:<backspace>
 " Quit insert mode with `jj`
 inoremap jj <Esc>
@@ -142,7 +144,7 @@ for c in range(char2nr('A'), char2nr('Z'))
 endfor
 
 " Plugin Customizations
-let g:NERDTreeIgnore = ['\.pyc$', '__pycache__']
+let g:NERDTreeIgnore = ['\.pyc$', '__pycache__', '\.swp$']
 
 " Ripped from Eli; see if this makes __pycache__ go away, then adapt from there
 " let g:NERDChristmasTree = 1
