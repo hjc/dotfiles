@@ -6,7 +6,7 @@ function .runsudo --description 'Run current command line as root'
 end
 
 function .runlesspipe --description 'Pipe current command to less'
-  set end_pos (commandline -C)
+  set end_pos (math (commandline | wc -m) + 2)
   commandline -C $end_pos
   commandline -i ' | less'
 end
@@ -14,9 +14,14 @@ end
 function .fixgit --description 'Fix a mistyped git command'
   set end_pos (commandline -C)
   commandline -C 3
-  set current_command (commandline | sed -r s"/"(commandline -c)"//")
+  set current_command (commandline)
+  if test $current_command = ""
+    commandline -r 'git '
+    return 0
+  end
+  set current_command (echo $current_command | sed -r s"/"(commandline -c)"//")
   commandline -C 0
-  commandline -r 'git'
+  commandline -r 'git '
   commandline -i $current_command 
   commandline -C $end_pos
 end
@@ -32,5 +37,18 @@ function .fixcommand --description 'Try to fix a mistyped command'
   end
 end
 
+# @TODO: what does this do? does it include Google Cloud helpers? does it work?
 bash /home/hayden/google-cloud-sdk/path.bash.inc
-set -gx PATH /usr/sbin /sbin $PATH
+
+# make sure sbin's are in $PATH, which they are not by default in Debian
+if test (lsb_release -is) = "Debian"
+  set -gx PATH /usr/sbin /sbin $PATH
+end
+
+# @TODO: ????????????
+set -gx CWD (pwd)
+
+# Add powerline stuff to Fish's function path so we can use it
+set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
+# and launch powerline
+powerline-setup
