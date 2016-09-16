@@ -9,7 +9,7 @@ call plug#begin("~/.vim/plugged")
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'saltstack/salt-vim'
+Plug 'saltstack/salt-vim'  " Standard YAML formatting isn't enough
 Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
