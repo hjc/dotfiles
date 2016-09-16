@@ -10,6 +10,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'saltstack/salt-vim'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
