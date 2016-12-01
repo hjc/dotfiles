@@ -8,8 +8,14 @@ call plug#begin("~/.vim/plugged")
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'saltstack/salt-vim'
+Plug 'saltstack/salt-vim'  " Standard YAML formatting isn't enough
+Plug 'editorconfig/editorconfig-vim'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
 
 call plug#end()
 
@@ -91,8 +97,6 @@ map <leader>q gqip
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
-" Uncomment this to enable by default:
-" set list " To enable by default
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
@@ -116,6 +120,8 @@ inoremap jj <Esc>
 nnoremap <leader>, :update<CR>
 " Toggle line numbers with `,tn`
 nnoremap <leader>tn :set invnumber<CR>
+" Toggle paste with `,tp`
+nnoremap <leader>tp :set invpaste<CR>
 " Activate and deactivate nerdtree
 nnoremap <leader>nt :NERDTreeToggle<CR>
 
@@ -126,13 +132,13 @@ nnoremap <leader>bnv :vsplit<CR>:<backspace>
 nnoremap <leader>bnh :split<CR>:<backspace>
 
 " Resize vertical buffers (<leader>brv)
-function ResizeVertical(amount)
+function! ResizeVertical(amount)
   execute "vertical resize +" . a:amount
 endfunction
 nnoremap <leader>brv :<C-U>call ResizeVertical(v:count1)<CR>:<backspace>
 
 " Resize horizontal buffers (<leader>brh)
-function ResizeHorizontal(amount)
+function! ResizeHorizontal(amount)
   execute "resize +" . a:amount
 endfunction
 nnoremap <leader>brh :<C-U>call ResizeHorizontal(v:count1)<CR>:<backspace>
@@ -145,6 +151,9 @@ endfor
 
 " Plugin Customizations
 let g:NERDTreeIgnore = ['\.pyc$', '__pycache__', '\.swp$']
+
+" Customize vim-markdown
+let g:vim_markdown_folding_disabled = 1
 
 " Ripped from Eli; see if this makes __pycache__ go away, then adapt from there
 " let g:NERDChristmasTree = 1
