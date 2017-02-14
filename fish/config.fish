@@ -52,3 +52,11 @@ set -gx CWD (pwd)
 set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
 # and launch powerline
 powerline-setup
+
+# some fixes to make Go work
+set -gx GOPATH $HOME/go
+set -gx PYENV_ROOT $HOME/.pyenv
+set -gx PATH $GOPATH/bin $PYENV_ROOT/bin $PATH
+
+status --is-interactive; and source (pyenv init -|psub)
+ulimit -n 8096
