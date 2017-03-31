@@ -19,6 +19,7 @@ Plug 'mattn/webapi-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'vim-scripts/groovy.vim'
 Plug 'lumiliet/vim-twig'
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 
