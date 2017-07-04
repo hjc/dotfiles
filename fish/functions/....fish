@@ -1,9 +1,3 @@
 function ...
   cd ../..
 end
-
-
-
-
-
-
