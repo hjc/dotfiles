@@ -16,6 +16,10 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'vim-scripts/groovy.vim'
+Plug 'lumiliet/vim-twig'
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 
@@ -109,6 +113,9 @@ let g:solarized_termtrans=1
 " in ~/.vim/colors/ and uncomment:
 " colorscheme solarized
 
+" mouse customizations
+se mouse=
+
 
 " My own customizations
 " Clear highlighting; `:<backspace>` gets rid of lingering commands, it's used
@@ -176,3 +183,5 @@ let g:vim_markdown_folding_disabled = 1
 " endfunction
 
 " autocmd VimEnter * if exists(":NERDTree") | call NERDTreeSettings() | endif
+" autocmd VimLeave * call system("xclip -o | xclip -selection c")
+autocmd VimLeave * call system("echo -n $'" . escape(getreg(), "'") . "' | xsel -ib")

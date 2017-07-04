@@ -1,11 +1,24 @@
 [global_config]
+  always_split_with_profile = True
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
-  title_transmit_bg_color = "#282a2e"
-  title_inactive_fg_color = "#c5c8c6"
-  title_transmit_fg_color = "#c5c8c6"
+  title_font = Fira Code Light 9
   title_inactive_bg_color = "#373b41"
+  title_inactive_fg_color = "#c5c8c6"
+  title_transmit_bg_color = "#282a2e"
+  title_transmit_fg_color = "#c5c8c6"
+  title_use_system_font = False
 [keybindings]
   paste = <Primary><Shift>v
+  close_term = None
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
 [profiles]
   [[default]]
     palette = "#282a2e:#a54242:#8c9440:#de935f:#5f819d:#85678f:#5e8d87:#707880:#373b41:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c8c6"
@@ -21,45 +34,43 @@
     audible_bell = True
     scrollback_infinite = True
   [[trim]]
-    palette = "#0f0e0d:#845336:#57553c:#a17e3e:#43454f:#604848:#5c6652:#a18b62:#383332:#8c4f4a:#898471:#c8b491:#65788f:#755e4a:#718062:#bc9d66"
     background_image = None
     cursor_color = "#daba8b"
     foreground_color = "#daba8b"
     copy_on_selection = True
-    background_color = "#191716"
+    cursor_color = "#c5c8c6"
+    foreground_color = "#c5c8c6"
+    palette = "#282a2e:#a54242:#8c9440:#de935f:#5f819d:#85678f:#5e8d87:#707880:#373b41:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c8c6"
     scrollback_infinite = True
+    urgent_bell = True
+    visible_bell = True
   [[navy-and-ivory]]
-    palette = "#032c36:#c2454e:#7cbf9e:#8a7a63:#2e3340:#ff5879:#44b5b1:#f2f1b9:#065f73:#ef5847:#a2d9b1:#beb090:#61778d:#ff99a1:#9ed9d8:#f6f6c9"
     background_image = None
+    background_color = "#021b21"
+    copy_on_selection = True
     cursor_color = "#e8dfd6"
     foreground_color = "#e8dfd6"
-    copy_on_selection = True
-    background_color = "#021b21"
+    palette = "#032c36:#c2454e:#7cbf9e:#8a7a63:#2e3340:#ff5879:#44b5b1:#f2f1b9:#065f73:#ef5847:#a2d9b1:#beb090:#61778d:#ff99a1:#9ed9d8:#f6f6c9"
     scrollback_infinite = True
   [[solarized-dark]]
     background_image = None
     visible_bell = True
     audible_bell = True
-    palette = "#002b36:#dc322f:#859900:#b58900:#268bd2:#6c71c4:#2aa198:#93a1a1:#657b83:#dc322f:#859900:#b58900:#268bd2:#6c71c4:#2aa198:#fdf6e3"
-    cursor_color = "#93a1a1"
-    foreground_color = "#93a1a1"
     background_color = "#002b36"
+    copy_on_selection = True
+    cursor_color = "#93a1a1"
+    font = Fira Code Light 10
+    foreground_color = "#93a1a1"
+    palette = "#002b36:#dc322f:#859900:#b58900:#268bd2:#6c71c4:#2aa198:#93a1a1:#657b83:#dc322f:#859900:#b58900:#268bd2:#6c71c4:#2aa198:#fdf6e3"
     scrollback_infinite = True
   [[x-erosion]]
     palette = "#332d29:#8c644c:#746c48:#908a66:#646a6d:#605655:#4b5c5e:#504339:#817267:#9f7155:#857b52:#9c956e:#71777a:#656565:#556d70:#9a875f"
     background_image = None
-    cursor_color = "#bea492"
-    foreground_color = "#bea492"
+    visible_bell = True
     copy_on_selection = True
-    background_color = "#181512"
+    cursor_color = "#bea492"
+    font = Fira Code Light 10
+    foreground_color = "#bea492"
+    palette = "#332d29:#8c644c:#746c48:#908a66:#646a6d:#605655:#4b5c5e:#504339:#817267:#9f7155:#857b52:#9c956e:#71777a:#656565:#556d70:#9a875f"
     scrollback_infinite = True
-[layouts]
-  [[default]]
-    [[[child1]]]
-      type = Terminal
-      parent = window0
-      profile = default
-    [[[window0]]]
-      type = Window
-      parent = ""
-[plugins]
+    use_system_font = False
