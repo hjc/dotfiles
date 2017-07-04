@@ -19,6 +19,11 @@ Plug 'mattn/webapi-vim'
 Plug 'dag/vim-fish' , { 'for': 'fish' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': ['Dockerfile', 'docker-compose'] }
 Plug 'mattn/emmet-vim'
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'vim-scripts/groovy.vim'
+Plug 'lumiliet/vim-twig'
+Plug 'chikamichi/mediawiki.vim'
+Plug 'tweekmonster/django-plus.vim'
 
 call plug#end()
 
