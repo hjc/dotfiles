@@ -25,13 +25,17 @@ function fish_prompt -d 'Write out the prompt'
     if test $in_git_repo -eq 0
         set_color E2E270
         printf '%s ' (__fish_git_prompt)
-        printf ' ('(__git_extract_branch_name)')'
+        # printf ' ('(__git_extract_branch_name)')'
         set_color normal
     end
     set_color blue
     printf ' {'
     set_color yellow
-    printf (pwd | sed -r s"!"$HOME"!~!")
+    if test (uname) = "Darwin"
+      printf (pwd | sed s"!"$HOME"!~!")
+    else
+      printf (pwd | sed -r s"!"$HOME"!~!")
+    end
     set_color blue
     printf '} '
     set_color cyan
@@ -48,5 +52,9 @@ function __git_extract_branch_name -d "Extracts the current branch name"
     # use git status --porcelain for predictable output. Then find the branch
     #   specifier, strip some pretty printing from it, and finally, print the
     #   reference to the upstream branch (which looks like: develop...origin/develop)
-    echo (git status -b --porcelain | grep '##' | sed -r s'/## //' | sed -r s'/\.\.\..*//')
+    if test (uname) = "Darwin"
+      echo (git status -b --porcelain | grep '##' | sed s'/## //' | sed s'/\.\.\..*//')
+    else
+      echo (git status -b --porcelain | grep '##' | sed -r s'/## //' | sed -r s'/\.\.\..*//')
+    end
 end

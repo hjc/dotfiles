@@ -1,27 +1,24 @@
 function __has_option --description "Pass in a desired option and a list of arguments and
                          if the option is found 0 is returned, otherwise 1"
-	set desired_option $argv[1]
+	set -l desired_option $argv[1]
 	set --erase argv[1]
 
-	if test (expr substr "$desired_option" 1 2) = "--"
-		set -l pattern "^"$desired_option'$'
+	if test (echo $desired_option | head -c2) = "--"
+		set -g pattern "^"$desired_option'$'
 	else
-		if test (expr substr "$desired_option" 1 1) = "-"
-			set desired_option (expr substr "$desired_option" 2 (expr length "$desired_option"))
+		if test (echo "$desired_option" | head -c1) = "-"
+			set desired_option (echo "$desired_option" | cut -c2-)
 		end
-		set -l pattern "-"$desired_option''
-                # echo $pattern
+
+		set -g pattern "-"$desired_option
 	end
 
 	for i in $argv
-                # echo $i
-                # echo (expr match $i "$pattern")
-		if test (expr match $i "$pattern") -ne 0
-                        # echo '?'
+		if test -n (echo $i | grep -G -e $pattern)
 			return 0
 		end
 	end
 
 	return 1
 end
-                                   
+

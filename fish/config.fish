@@ -38,25 +38,38 @@ function .fixcommand --description 'Try to fix a mistyped command'
 end
 
 # @TODO: what does this do? does it include Google Cloud helpers? does it work?
-bash /home/hayden/google-cloud-sdk/path.bash.inc
+if test -f ~/google-cloud-sdk/path.bash.inc
+  bash ~/google-cloud-sdk/path.bash.inc
+end
 
 # make sure sbin's are in $PATH, which they are not by default in Debian
-if test (lsb_release -is) = "Debian"
+if test (which lsb_release); and test (lsb_release -is) = "Debian"
   set -gx PATH /usr/sbin /sbin $PATH
 end
 
 # @TODO: ????????????
 set -gx CWD (pwd)
 
-# Add powerline stuff to Fish's function path so we can use it
-set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
-# and launch powerline
-powerline-setup
+if test (which powerline-setup)
+  # Add powerline stuff to Fish's function path so we can use it
+  set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
+  # and launch powerline
+  powerline-setup
+end
 
 # some fixes to make Go work
-set -gx GOPATH $HOME/go
-set -gx PYENV_ROOT $HOME/.pyenv
-set -gx PATH $GOPATH/bin $PYENV_ROOT/bin $PATH
+if test -d $HOME/go
+  set -gx GOPATH $HOME/go
+  set -gx PATH $GOPATH/bin $PATH
+end
 
-status --is-interactive; and source (pyenv init -|psub)
+if test -d $HOME/.pyenv
+  set -gx PYENV_ROOT $HOME/.pyenv
+  set -gx PATH {$PYENV_ROOT}/bin $PATH
+end
+
+if test (which pyenv)
+  status --is-interactive; and source (pyenv init -|psub)
+end
+
 ulimit -n 8096
