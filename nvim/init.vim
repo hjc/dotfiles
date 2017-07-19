@@ -35,8 +35,10 @@ filetype plugin indent on
 
 let mapleader = ","
 
-" Security
-set modelines=0
+" Use the below if you care about security
+" set modelines=0
+" If you want modelines to work, this should be fine
+set modelines=2
 
 " Show line numbers and relative line numbers
 set number
