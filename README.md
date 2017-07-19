@@ -10,3 +10,7 @@ See `.bash_aliases` for a list of aliases.
     * Installing Psysh
     * Prompting for which shell.
     * Terminator.
+    * Installing nvim and scripts.
+    * Installing fish and script.
+    * Linking git stuff.
+    * Setting git up.
