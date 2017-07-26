@@ -1,0 +1,8 @@
+[diff "rtftomarkdown"]
+    textconv=~/.bin/rtftomarkdown.rb
+    prompt=false
+[core]
+	editor = nvim
+[user]
+	name = Hayden Chudy
+	email = hjc1710@gmail.com

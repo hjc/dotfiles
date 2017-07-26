@@ -14,3 +14,4 @@ See `.bash_aliases` for a list of aliases.
     * Installing fish and script.
     * Linking git stuff.
     * Setting git up.
+      * Also linking the `.gitconfig`.
