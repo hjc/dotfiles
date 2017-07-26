@@ -141,6 +141,8 @@ nnoremap <leader>tn :set invnumber<CR> :se invrelativenumber<CR>
 nnoremap <leader>tp :set invpaste<CR> <Space>
 " Activate and deactivate nerdtree
 nnoremap <leader>nt :NERDTreeToggle<CR>
+" Activate and deactivate spelling
+nnoremap <leader>ts :se invspell<CR>
 "
 " Buffer funs (<leader>b then things)
 
