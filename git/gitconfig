@@ -3,6 +3,7 @@
     prompt=false
 [core]
 	editor = nvim
+    excludesfile = ~/.config/git/global.gitignore
 [user]
 	name = Hayden Chudy
 	email = hjc1710@gmail.com
