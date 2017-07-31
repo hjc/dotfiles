@@ -25,6 +25,12 @@ Plug 'lumiliet/vim-twig'
 Plug 'chikamichi/mediawiki.vim'
 Plug 'tweekmonster/django-plus.vim'
 
+if has('nvim')
+    Plug 'neomake/neomake'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'zchee/deoplete-jedi'
+endif
+
 call plug#end()
 
 " Turn on syntax highlighting
@@ -137,7 +143,7 @@ nnoremap <leader>, :update<CR>
 set mouse-=a
 " Toggle line numbers with `,tn`
 nnoremap <leader>tn :set invnumber<CR> :se invrelativenumber<CR>
-" Toggle past
+" Toggle paste
 nnoremap <leader>tp :set invpaste<CR> <Space>
 " Activate and deactivate nerdtree
 nnoremap <leader>nt :NERDTreeToggle<CR>
@@ -168,6 +174,10 @@ for c in range(char2nr('A'), char2nr('Z'))
   execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
 endfor
 
+" Neomake / QuickFix things
+nnoremap <leader>qn :lnext<CR>:<backspace>
+nnoremap <leader>qp :lprevious<CR>:<backspace>
+
 " Plugin Customizations
 let g:NERDTreeIgnore = ['\.pyc$', '__pycache__', '\.swp$']
 
@@ -197,3 +207,31 @@ let g:vim_markdown_folding_disabled = 1
 " autocmd VimEnter * if exists(":NERDTree") | call NERDTreeSettings() | endif
 autocmd BufRead,BufNewFile *.judo setfiletype json
 autocmd BufRead,BufNewFile *.cyclops setfiletype json
+
+" ======================
+" Neomake
+" ======================
+
+function! NeomakeSettings()
+    autocmd BufReadPost,BufWritePost * Neomake
+    let g:neomake_open_list = 2
+    let g:neomake_javascript_enabled_makers = ['eslint']
+endfunction
+
+autocmd VimEnter * if exists(":Neomake") | call NeomakeSettings() | endif
+
+
+" =================
+" Deoplete
+" =================
+function! DeopleteSettings()
+    call deoplete#enable()
+endfunction
+
+let deoplete#sources#jedi#show_docstring = 1
+if has("nvim")
+    let g:python_host_prog = expand('~/.pyenv/versions/neovim2/bin/python')
+    let g:python3_host_prog = expand('~/.pyenv/versions/neovim3/bin/python')
+endif
+
+autocmd VimEnter * if has("nvim") | call DeopleteSettings() | endif

@@ -15,3 +15,6 @@ See `.bash_aliases` for a list of aliases.
     * Linking git stuff.
     * Setting git up.
       * Also linking the `.gitconfig`.
+    * Need to add installing pyenv and setting up neoplete with Python3 to our
+      install script.
+      * Remember the call to `:UpdateRemotePlugins`
