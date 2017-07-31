@@ -72,4 +72,8 @@ if test (which pyenv)
   status --is-interactive; and source (pyenv init -|psub)
 end
 
+if test (which pyenv-virtualenv)
+  status --is-interactive; and source (pyenv virtualenv-init -|psub)
+end
+
 ulimit -n 8096
