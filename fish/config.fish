@@ -77,3 +77,5 @@ if test (which pyenv-virtualenv)
 end
 
 ulimit -n 8096
+
+source ~/.config/fish/functions/event_handlers/fish_short_prompt.fish
