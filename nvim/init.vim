@@ -112,7 +112,7 @@ vnoremap <F1> :set invfullscreen<CR>
 " Textmate holdouts
 
 " Formatting
-map <leader>q gqip
+map <leader>qf gqip
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
@@ -229,6 +229,9 @@ function! DeopleteSettings()
 endfunction
 
 let deoplete#sources#jedi#show_docstring = 1
+" Not sure this does anything
+let g:jedi#auto_close_doc = 0
+
 if has("nvim")
     let g:python_host_prog = expand('~/.pyenv/versions/neovim2/bin/python')
     let g:python3_host_prog = expand('~/.pyenv/versions/neovim3/bin/python')
