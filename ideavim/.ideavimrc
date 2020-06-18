@@ -1,0 +1,174 @@
+" ==========================================
+"     THIS FILE IS FOR RIDER/INTELLIJ!!!
+"     THERE ARE VS SPECIFIC THINGS HERE!
+" ==========================================
+
+" Don't try to be vi compatible
+set nocompatible
+
+let mapleader = ","
+
+" Security
+set modelines=0
+
+" Line numbers
+se number
+
+" Show file stats
+set ruler
+
+" Blink cursor on error instead of beeping (grr)
+set visualbell
+
+" Encoding
+set encoding=utf-8
+
+" Whitespace
+set wrap
+set textwidth=79
+set formatoptions=tcqrn1
+" set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set noshiftround
+
+" Word Wrap can go fuck itself
+se nowrap
+
+" Cursor motion
+set scrolloff=3
+set backspace=indent,eol,start
+set matchpairs+=<:> " use % to jump between pairs
+runtime! macros/matchit.vim
+
+" Allow hidden buffers
+set hidden
+
+" Rendering
+set ttyfast
+
+" Status bar
+set laststatus=2
+
+" Last line
+set showmode
+set showcmd
+
+" Searching
+" nnoremap / /\v
+" vnoremap / /\v
+set hlsearch 
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+
+" Visualize tabs and newlines
+set listchars=tab:▸\ ,eol:¬
+
+" mouse customizations
+se mouse=
+
+" BEGIN KEYBINDS
+
+" Move up/down editor lines
+nnoremap j gj
+nnoremap k gk
+
+" I've never needed this in my entire life and it fucking BLOWS DICK and causes
+" all sorts of terrible accidental line deletions and frustration and undoes
+" and FUCK this functionality
+nmap <s-k> <nop>
+nmap <s-j> <nop>
+vmap <s-k> <nop>
+vmap <s-j> <nop>
+
+" clear search
+map <leader><space> :let @/=''<cr> 
+
+" Remap help key.
+inoremap <F1> <ESC>:set invfullscreen<CR>a
+nnoremap <F1> :set invfullscreen<CR>
+vnoremap <F1> :set invfullscreen<CR>
+
+" Formatting
+map <leader>q gqip
+
+" Or use your leader key + l to toggle on/off
+" Toggle tabs and EOL
+map <leader>l :set list!<CR> 
+
+" My own customizations
+" Clear highlighting; `:<backspace>` gets rid of lingering commands, it's used
+" frequently
+nnoremap <Space> :noh<CR>
+" Quit insert mode with `jj`
+inoremap jj <Esc>
+" Save a file if there are changes with `,,`
+nnoremap <leader>, :w<CR>
+" Toggle line numbers with `,tn`
+nnoremap <leader>tn :action EditorToggleShowLineNumbers<CR>
+" Toggle paste with `,tp`
+nnoremap <leader>tp :set invpaste<CR>
+" Buffer funs (<leader>b then things)
+
+" Open buffers (<leader>bn then v or h)
+nnoremap <leader>bnv :vsplit<CR>:<backspace>
+nnoremap <leader>bnh :split<CR>:<backspace>
+
+" Comment toggling (no vim-commentary in VS)
+" nnoremap gcc :vsc Edit.ToggleComment<CR>
+" vnoremap gc :vsc Edit.ToggleComment<CR><Esc><Esc>
+
+" Resize vertical buffers (<leader>brv)
+function! ResizeVertical(amount)
+  execute "vertical resize +" . a:amount
+endfunction
+nnoremap <leader>brv :<C-U>call ResizeVertical(v:count1)<CR>:<backspace>
+
+" Resize horizontal buffers (<leader>brh)
+function! ResizeHorizontal(amount)
+  execute "resize +" . a:amount
+endfunction
+nnoremap <leader>brh :<C-U>call ResizeHorizontal(v:count1)<CR>:<backspace>
+
+" Set pseudo-caps lock in insert mode with `CTRL-6`
+for c in range(char2nr('A'), char2nr('Z'))
+  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
+  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
+endfor
+
+" ... always turn on syntax highlighting; dear FUCK Windows is a fucking
+" clusterfuck
+syn on
+se autoindent
+se smartindent
+
+for i in split(globpath('~/.vim/', '*'), '\n')
+    exe 'source' i
+endfor
+
+" IDEA START
+
+" Emulated Plugins
+set surround
+set ideajoin
+set commentary
+set clipboard+=unnamed
+set multiple-cursors
+
+nmap <leader>. :action ShowIntentionActions<CR>
+nmap <leader>r :action ReformatCode<CR>
+vmap <leader>r :action ReformatCode<CR>
+nmap <leader>f :action ExpandRegion<CR>
+nmap <leader><S-F> :action CollapseRegion<CR>
+
+" Refactoring and Code Cleanup bindings
+
+nmap <leader>cc :action CodeCleanup<CR>
+nmap <leader>cn :action RenameElement<CR>
+
+" Task specific section
+nmap <leader>td :action tasks.show.task.description<CR>
+nmap <leader>tb :action tasks.open.in.browser<CR>
